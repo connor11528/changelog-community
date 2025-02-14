@@ -84,3 +84,5 @@ To learn more about the technologies used in this site template, see the followi
 - [Next.js](https://nextjs.org/docs) - the official Next.js documentation
 - [Motion One](https://motion.dev/) - the official Motion One documentation
 - [MDX](https://mdxjs.com/) - the official MDX documentation
+
+deploy + 1
