@@ -1,5 +1,6 @@
 import { useId } from 'react'
 
+// UNUSED COMPONENT
 export function Logo(props: React.ComponentPropsWithoutRef<'svg'>) {
   let id = useId()
 

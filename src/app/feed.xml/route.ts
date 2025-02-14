@@ -10,13 +10,13 @@ export async function GET(req: Request) {
   }
 
   let author = {
-    name: 'Joe Davola',
-    email: 'crazy.joe@example.com',
+    name: 'Connor Leech',
+    email: 'connor@lombardlabs.io',
   }
 
   let feed = new Feed({
-    title: 'Commit',
-    description: 'Open-source Git client for macOS minimalists',
+    title: 'changelog.community',
+    description: 'AI-powered changelog generator',
     author,
     id: siteUrl,
     link: siteUrl,

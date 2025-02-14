@@ -1,8 +1,8 @@
 import Link from 'next/link'
 
 import { IconLink } from '@/components/IconLink'
-import { Logo } from '@/components/Logo'
 import { SignUpForm } from '@/components/SignUpForm'
+import {metadata} from "@/app/layout";
 
 function BookIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -32,42 +32,40 @@ function FeedIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   )
 }
 
-function XIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
-  return (
-    <svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor" {...props}>
-      <path d="M9.51762 6.77491L15.3459 0H13.9648L8.90409 5.88256L4.86212 0H0.200195L6.31244 8.89547L0.200195 16H1.58139L6.92562 9.78782L11.1942 16H15.8562L9.51728 6.77491H9.51762ZM7.62588 8.97384L7.00658 8.08805L2.07905 1.03974H4.20049L8.17706 6.72795L8.79636 7.61374L13.9654 15.0075H11.844L7.62588 8.97418V8.97384Z" />
-    </svg>
-  )
+function GlobeIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
+    return (<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
+         className="size-6">
+        <path strokeLinecap="round" strokeLinejoin="round"
+              d="m6.115 5.19.319 1.913A6 6 0 0 0 8.11 10.36L9.75 12l-.387.775c-.217.433-.132.956.21 1.298l1.348 1.348c.21.21.329.497.329.795v1.089c0 .426.24.815.622 1.006l.153.076c.433.217.956.132 1.298-.21l.723-.723a8.7 8.7 0 0 0 2.288-4.042 1.087 1.087 0 0 0-.358-1.099l-1.33-1.108c-.251-.21-.582-.299-.905-.245l-1.17.195a1.125 1.125 0 0 1-.98-.314l-.295-.295a1.125 1.125 0 0 1 0-1.591l.13-.132a1.125 1.125 0 0 1 1.3-.21l.603.302a.809.809 0 0 0 1.086-1.086L14.25 7.5l1.256-.837a4.5 4.5 0 0 0 1.528-1.732l.146-.292M6.115 5.19A9 9 0 1 0 17.18 4.64M6.115 5.19A8.965 8.965 0 0 1 12 3c1.929 0 3.716.607 5.18 1.64"/>
+    </svg>);
 }
 
 export function Intro() {
-  return (
-    <>
-      <div>
-        <Link href="/">
-          <Logo className="inline-block h-8 w-auto" />
-        </Link>
-      </div>
-      <h1 className="mt-14 font-display text-4xl/tight font-light text-white">
-        Open-source Git client{' '}
-        <span className="text-sky-300">for macOS minimalists</span>
-      </h1>
-      <p className="mt-4 text-sm/6 text-gray-300">
-        Commit is a lightweight Git client you can open from anywhere any time
-        you’re ready to commit your work with a single keyboard shortcut. It’s
-        fast, beautiful, and completely unnecessary.
-      </p>
-      <SignUpForm />
-      <div className="mt-8 flex flex-wrap justify-center gap-x-1 gap-y-3 sm:gap-x-2 lg:justify-start">
-        <IconLink href="#" icon={BookIcon} className="flex-none">
-          Documentation
-        </IconLink>
-        <IconLink href="#" icon={GitHubIcon} className="flex-none">
-          GitHub
-        </IconLink>
-        <IconLink href="/feed.xml" icon={FeedIcon} className="flex-none">
-          RSS
-        </IconLink>
+    return (
+        <>
+            <div>
+                <Link href="/">
+                    <div className="inline-block h-8 w-auto text-2xl font-bold text-white">changelog.community</div>
+                </Link>
+            </div>
+            <h1 className="mt-14 font-display text-4xl/tight font-light text-white">
+                AI powered changelog generator{' '}
+                <span className="text-sky-300">for people who ship 🚢</span>
+            </h1>
+            <p className="mt-4 text-sm/6 text-gray-300">
+                {metadata.description}
+            </p>
+            <SignUpForm/>
+            <div className="mt-8 flex flex-wrap justify-center gap-x-1 gap-y-3 sm:gap-x-2 lg:justify-start">
+        {/*<IconLink href="#" icon={BookIcon} className="flex-none">*/}
+        {/*  Documentation*/}
+        {/*</IconLink>*/}
+        {/*<IconLink href="#" icon={GitHubIcon} className="flex-none">*/}
+        {/*  GitHub*/}
+        {/*</IconLink>*/}
+        {/*<IconLink href="/feed.xml" icon={FeedIcon} className="flex-none">*/}
+        {/*  RSS*/}
+        {/*</IconLink>*/}
       </div>
     </>
   )
@@ -77,8 +75,8 @@ export function IntroFooter() {
   return (
     <p className="flex items-baseline gap-x-2 text-[0.8125rem]/6 text-gray-500">
       Brought to you by{' '}
-      <IconLink href="#" icon={XIcon} compact>
-        Joe Davola
+      <IconLink href="https://www.lombardlabs.io/" target="_blank" icon={GlobeIcon} compact>
+        Lombard Labs
       </IconLink>
     </p>
   )
