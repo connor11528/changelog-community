@@ -3,6 +3,8 @@ import Link from 'next/link'
 import { IconLink } from '@/components/IconLink'
 import { SignUpForm } from '@/components/SignUpForm'
 import {metadata} from "@/app/layout";
+import {useAuth} from "@clerk/nextjs";
+import {Button} from "@/components/Button";
 
 function BookIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -56,6 +58,7 @@ export function Intro() {
                 {metadata.description}
             </p>
             <SignUpForm/>
+
             <div className="mt-8 flex flex-wrap justify-center gap-x-1 gap-y-3 sm:gap-x-2 lg:justify-start">
         {/*<IconLink href="#" icon={BookIcon} className="flex-none">*/}
         {/*  Documentation*/}

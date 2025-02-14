@@ -1,10 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { useSignUp } from '@clerk/nextjs';
+import {useAuth, useSignUp} from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
+import {Button} from "@/components/Button";
+import Link from "next/link";
 
 export function SignUpForm() {
+    const { isSignedIn } = useAuth();
     const { isLoaded, signUp, setActive } = useSignUp();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -13,6 +16,14 @@ export function SignUpForm() {
     const [code, setCode] = useState('');
     const [error, setError] = useState('');
     const router = useRouter();
+
+    if (isSignedIn){
+        return (
+            <div className="mt-5">
+                <Link href="/dashboard"><Button>Go to Dashboard ➡️</Button></Link>
+            </div>
+        )
+    }
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -59,6 +70,8 @@ export function SignUpForm() {
                 code,
             });
 
+            console.log({completeSignUp})
+
             if (completeSignUp.status !== 'complete') {
                 console.error(JSON.stringify(completeSignUp, null, 2))
             }
@@ -96,7 +109,7 @@ export function SignUpForm() {
             <div className="flex flex-col items-center justify-center text-white p-4">
                 <form onSubmit={handleVerify} className="flex flex-col w-full max-w-md space-y-4">
                     <label htmlFor="code" className="text-lg">
-                        Enter your verification code
+                        Enter your email verification code
                     </label>
                     <input
                         value={code}
@@ -178,7 +191,14 @@ export function SignUpForm() {
             >
                 Sign Up
             </button>
+            <div className="mt-4 text-center text-gray-400">
+                Already have an account?{' '}
+                <Link href="/sign-in" className="text-sky-400 hover:text-sky-300 transition-colors">
+                    Sign in
+                </Link>
+            </div>
         </form>
+
     );
 }
 
