@@ -23,6 +23,7 @@
     "cheerio": "^1.0.0-rc.12",
     "clsx": "^2.1.0",
     "feed": "^4.2.2",
+    "lucide-react": "^0.475.0",
     "mdast-util-to-string": "^4.0.0",
     "mdx-annotations": "^0.1.4",
     "motion": "^10.17.0",
