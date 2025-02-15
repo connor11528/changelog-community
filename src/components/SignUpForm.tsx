@@ -74,9 +74,11 @@ export function SignUpForm() {
 
             if (completeSignUp.status !== 'complete') {
                 console.error(JSON.stringify(completeSignUp, null, 2))
+                throw Error('Error completing signup');
             }
-
             // Verification complete!
+            await setActive({ session: completeSignUp.createdSessionId })
+
             // Create subdomain record
             const createResponse = await fetch('/api/create-subdomain', {
                 method: 'POST',
@@ -88,7 +90,6 @@ export function SignUpForm() {
             });
 
             if (createResponse.ok) {
-                await setActive({ session: completeSignUp.createdSessionId })
                 router.push('/dashboard')
             } else {
                 console.error('Error creating subdomain: ', createResponse.json())

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { auth, clerkClient } from "@clerk/nextjs/server";
+import {auth, currentUser} from "@clerk/nextjs/server";
 
 export async function POST(req: Request) {
     try {
@@ -11,16 +11,14 @@ export async function POST(req: Request) {
             return new NextResponse('Unauthorized', { status: 401 });
         }
 
-        // @ts-ignore
-        const clerkUser = await clerkClient.users.getUser(clerkId);
-        const email = clerkUser.emailAddresses[0].emailAddress;
+        const clerkUser = await currentUser()
 
         // Create or get user
         const user = await prisma.user.upsert({
             where: { clerkId },
             create: {
                 clerkId,
-                email
+                email: clerkUser?.emailAddresses[0]?.emailAddress ?? "",
             },
             update: {}
         });
@@ -41,6 +39,6 @@ export async function POST(req: Request) {
         return NextResponse.json(project);
     } catch (error) {
         console.error('Error:', error);
-        return new NextResponse('Error creating subdomain', { status: 500 });
+        return new NextResponse('Error creating subdomain: ' + error, { status: 500 });
     }
 }
