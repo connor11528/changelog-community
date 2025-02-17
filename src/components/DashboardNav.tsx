@@ -15,31 +15,24 @@ const DashboardNav = () => {
                     {/* Left side - Logo and navigation */}
                     <div className="flex items-center">
                         <Link href="/dashboard" className="flex items-center">
-                            <span className="text-xl font-bold text-gray-900">Dashboard</span>
+                            <span className="text-lg font-bold text-gray-900">changelog.community</span>
                         </Link>
 
                         <div className="hidden md:flex ml-10 space-x-8">
-                            <Link
-                                href="/dashboard"
-                                className="flex items-center text-gray-600 hover:text-gray-900"
-                            >
-                                <Home className="w-4 h-4 mr-2" />
-                                Home
-                            </Link>
-                            <Link
-                                href="/dashboard/analytics"
-                                className="flex items-center text-gray-600 hover:text-gray-900"
-                            >
-                                <BarChart className="w-4 h-4 mr-2" />
-                                Analytics
-                            </Link>
-                            <Link
-                                href="/dashboard/settings"
-                                className="flex items-center text-gray-600 hover:text-gray-900"
-                            >
-                                <Settings className="w-4 h-4 mr-2" />
-                                Settings
-                            </Link>
+                            {/*<Link*/}
+                            {/*    href="/dashboard"*/}
+                            {/*    className="flex items-center text-gray-600 hover:text-gray-900"*/}
+                            {/*>*/}
+                            {/*    <Home className="w-4 h-4 mr-2" />*/}
+                            {/*    Home*/}
+                            {/*</Link>*/}
+                            {/*<Link*/}
+                            {/*    href="/dashboard/settings"*/}
+                            {/*    className="flex items-center text-gray-600 hover:text-gray-900"*/}
+                            {/*>*/}
+                            {/*    <Settings className="w-4 h-4 mr-2" />*/}
+                            {/*    Settings*/}
+                            {/*</Link>*/}
                         </div>
                     </div>
 
