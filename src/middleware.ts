@@ -17,6 +17,8 @@ export default clerkMiddleware(async (auth, req: NextRequest) => {
     const subdomain = hostname.split('.')[0]
     const isSubdomainPage = subdomain !== 'www' && !subdomain.includes('localhost:');
 
+    console.log({isSubdomainPage, subdomain, userId })
+
     // Only consider it a subdomain if it's not www or localhost
     if (isSubdomainPage) {
         const url = req.nextUrl.clone()
