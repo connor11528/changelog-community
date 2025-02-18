@@ -1,15 +1,31 @@
 import {auth} from "@clerk/nextjs/server";
 import {NextResponse} from "next/server";
 import {openai} from "@/lib/openai";
+import {prisma} from "@/lib/prisma";
+import {getCurrentUser} from "@/lib/auth";
 
 export async function PUT(
     request: Request,
-    { params }: { params: { projectId: string } }
+    { params }: { params: Promise<{ projectId: string }> }
 ) {
     try {
-        const { userId } = await auth();
-        if (!userId) {
-            return new NextResponse("Unauthorized", { status: 401 });
+        const user = await getCurrentUser();
+        const { projectId } = await params;
+
+        // Get project and verify membership
+        const project = await prisma.project.findFirst({
+            where: {
+                id: projectId,
+                members: {
+                    some: {
+                        userId: user.id
+                    }
+                }
+            }
+        });
+
+        if (!project || !project.githubRepoOwner || !project.githubRepoName) {
+            return new NextResponse("Project not found or GitHub not configured", { status: 404 });
         }
 
         const { content, tone, focus } = await request.json();

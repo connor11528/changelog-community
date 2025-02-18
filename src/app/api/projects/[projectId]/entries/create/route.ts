@@ -1,13 +1,14 @@
-import { NextResponse } from "next/server";
+import {NextRequest, NextResponse} from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
 
 export async function POST(
-    request: Request,
-    { params }: { params: { projectId: string } }
+    request: NextRequest,
+    { params }: {  params: Promise<{ projectId: string }> }
 ) {
     try {
         const user = await getCurrentUser();
+        const { projectId } = await params;
 
         const body = await request.json();
         const { title, content, isDraft, fromCommits, startDate, endDate } = body;
@@ -16,7 +17,7 @@ export async function POST(
         const projectMember = await prisma.projectMember.findFirst({
             where: {
                 userId: user.id,
-                projectId: params.projectId
+                projectId: projectId
             }
         });
 
@@ -32,7 +33,7 @@ export async function POST(
                 fromCommits,
                 startDate: startDate ? new Date(startDate) : null,
                 endDate: endDate ? new Date(endDate) : null,
-                projectId: params.projectId
+                projectId: projectId
             }
         });
 

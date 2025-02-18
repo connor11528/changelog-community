@@ -1,10 +1,10 @@
-import { NextResponse } from "next/server";
+import {NextRequest, NextResponse} from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
 
 export async function GET(
-    request: Request,
-    { params }: { params: { projectId: string } }
+    request: NextRequest,
+    { params }: { params: Promise<{ projectId: string }> }
 ) {
     try {
         const user = await getCurrentUser();

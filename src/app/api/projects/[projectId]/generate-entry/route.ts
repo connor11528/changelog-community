@@ -6,7 +6,7 @@ import {getCurrentUser} from "@/lib/auth";
 
 export async function POST(
     request: Request,
-    { params }: { params: { projectId: string } }
+    { params }: { params: Promise<{ projectId: string }> }
 ) {
     try {
         const user = await getCurrentUser();
@@ -16,7 +16,6 @@ export async function POST(
 
         const { commits } = await request.json();
         const {projectId} = await params
-        console.log({projectId})
 
         // Get project and verify membership
         const project = await prisma.project.findFirst({

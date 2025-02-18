@@ -1,12 +1,12 @@
-import { NextResponse } from "next/server";
+import {NextRequest, NextResponse} from "next/server";
 import { prisma } from "@/lib/prisma";
-import { auth } from "@clerk/nextjs/server";
 import {getCurrentUser} from "@/lib/auth";
 
 export async function GET(
-    request: Request,
-    { params }: { params: { projectId: string } }
+    request: NextRequest,
+    { params }: { params: Promise<{ projectId: string }> }
 ) {
+    const { projectId } = await params;
     try {
         const user = await getCurrentUser()
 
@@ -21,7 +21,7 @@ export async function GET(
         // Get project and verify membership
         const project = await prisma.project.findFirst({
             where: {
-                id: params.projectId,
+                id: projectId,
                 members: {
                     some: {
                         userId: user.id
