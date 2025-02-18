@@ -6,6 +6,7 @@ import clsx from 'clsx'
 import { Providers } from '@/app/providers'
 
 import '@/styles/tailwind.css'
+import 'antd/dist/reset.css'
 
 const inter = Inter({
   subsets: ['latin'],

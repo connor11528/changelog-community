@@ -10,7 +10,7 @@ export default function DashboardLayout({
         <div className="min-h-screen bg-gray-100">
             <DashboardNav />
 
-            <main className="flex-1 p-4">
+            <main className="flex-1 p-4 pt-20">
                 <div className="mx-auto max-w-7xl">
                     {children}
                 </div>
