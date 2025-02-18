@@ -7,23 +7,17 @@ import { EyeOutlined, GithubOutlined, PlusOutlined } from "@ant-design/icons";
 import { getProjectUrl } from "@/lib/utils";
 import { GitHubLinkDialog } from '@/components/GitHubLinkDialog';
 import { EntryGenerationDialog } from "@/components/EntryGenerationDialog";
+import LoadingSpinner from "@/components/LoadingSpinner";
+import {Project} from "@/types/types";
 
 const { Title } = Typography;
-
-interface Project {
-    id: string;
-    subdomain: string;
-    githubRepoOwner?: string | null;
-    githubRepoName?: string | null;
-    githubToken?: string | null;
-}
 
 interface DashboardClientProps {
     projects: Project[];
 }
 
 export function DashboardClient({ projects }: DashboardClientProps) {
-    const [entryProject, setEntryProject] = useState<string | null>(null);
+    const [entryProject, setEntryProject] = useState<Project | null>(null);
     const [selectedProject, setSelectedProject] = useState<string | null>(null);
 
     return (
@@ -31,7 +25,7 @@ export function DashboardClient({ projects }: DashboardClientProps) {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Title level={2}>Your Projects</Title>
             </div>
-            {projects.map((project) => (
+            {!projects ? (<LoadingSpinner />) : projects.map((project) => (
                 <Card
                     key={project.id}
                     style={{
@@ -43,6 +37,11 @@ export function DashboardClient({ projects }: DashboardClientProps) {
                         title={project.subdomain + '.changelog.community'}
                         style={{ padding: '16px 24px', borderBottom: '1px solid #f0f0f0' }}
                     />
+                    <div style={{padding: '16px 24px', display: 'flex', gap: 12}}>
+                        <Link target='_blank' href={'https://github.com/' + project.githubRepoOwner + '/' + project.githubRepoName}>
+                            { 'https://github.com/' + project.githubRepoOwner + '/' + project.githubRepoName }
+                        </Link>
+                    </div>
                     <div style={{ padding: '16px 24px', display: 'flex', gap: 12 }}>
                         <Button
                             icon={<EyeOutlined />}
@@ -58,7 +57,7 @@ export function DashboardClient({ projects }: DashboardClientProps) {
                         </Button>
                         <Button
                             icon={<PlusOutlined />}
-                            onClick={() => setEntryProject(project.id)}
+                            onClick={() => setEntryProject(project)}
                             disabled={!project.githubRepoName}
                         >
                             Generate Entry
@@ -68,7 +67,7 @@ export function DashboardClient({ projects }: DashboardClientProps) {
             ))}
             {entryProject && (
                 <EntryGenerationDialog
-                    projectId={entryProject}
+                    project={entryProject}
                     isOpen={!!entryProject}
                     onClose={() => setEntryProject(null)}
                 />

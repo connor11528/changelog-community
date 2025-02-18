@@ -12,6 +12,7 @@
   "browserslist": "defaults, not ie <= 11",
   "dependencies": {
     "@ant-design/icons": "^5.6.1",
+    "@ant-design/nextjs-registry": "^1.0.2",
     "@clerk/nextjs": "^6.11.3",
     "@libsql/client": "^0.14.0",
     "@mdx-js/loader": "^3.0.0",

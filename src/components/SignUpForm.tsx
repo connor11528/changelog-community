@@ -20,7 +20,7 @@ export function SignUpForm() {
     if (isSignedIn){
         return (
             <div className="mt-5">
-                <Link href="/dashboard"><Button>Go to Dashboard ➡️</Button></Link>
+                <Button href="/dashboard">Go to Dashboard ➡️</Button>
             </div>
         )
     }

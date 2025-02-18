@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Modal, DatePicker, Button, Checkbox, Form, Input, Space, Typography } from 'antd';
 import type { DatePickerProps } from 'antd';
 import dayjs from 'dayjs';
+import Link from "next/link";
+import {Project} from "@/types/types";
 
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
@@ -16,12 +18,12 @@ interface Commit {
 }
 
 interface EntryGenerationDialogProps {
-    projectId: string;
+    project: Project;
     isOpen: boolean;
     onClose: () => void;
 }
 
-export function EntryGenerationDialog({ projectId, isOpen, onClose }: EntryGenerationDialogProps) {
+export function EntryGenerationDialog({ project, isOpen, onClose }: EntryGenerationDialogProps) {
     const [step, setStep] = useState<'dateRange' | 'commits' | 'preview'>('dateRange');
     const [dateRange, setDateRange] = useState<[dayjs.Dayjs | null, dayjs.Dayjs | null]>([null, dayjs()]);
     const [commits, setCommits] = useState<Commit[]>([]);
@@ -38,7 +40,7 @@ export function EntryGenerationDialog({ projectId, isOpen, onClose }: EntryGener
         const from = dateRange[0].toISOString();
         const to = (dateRange[1] || dayjs()).toISOString();
 
-        const response = await fetch(`/api/projects/${projectId}/commits?${new URLSearchParams({
+        const response = await fetch(`/api/projects/${project.id}/commits?${new URLSearchParams({
             from,
             to,
         })}`);
@@ -52,7 +54,7 @@ export function EntryGenerationDialog({ projectId, isOpen, onClose }: EntryGener
         setIsLoading(true)
         try {
             const selectedCommitData = commits.filter(c => selectedCommits.has(c.sha));
-            const response = await fetch(`/api/projects/${projectId}/generate-entry`, {
+            const response = await fetch(`/api/projects/${project.id}/generate-entry`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -64,7 +66,7 @@ export function EntryGenerationDialog({ projectId, isOpen, onClose }: EntryGener
             form.setFieldsValue(data);
             setStep('preview');
         } catch (e) {
-
+            console.error('Error generating entry:', e);
         } finally {
             setIsLoading(false)
         }
@@ -74,7 +76,7 @@ export function EntryGenerationDialog({ projectId, isOpen, onClose }: EntryGener
         try {
             setIsLoading(true)
             const values = await form.validateFields();
-            const response = await fetch(`/api/projects/${projectId}/entries/create`, {
+            const response = await fetch(`/api/projects/${project.id}/entries/create`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -124,7 +126,7 @@ export function EntryGenerationDialog({ projectId, isOpen, onClose }: EntryGener
                 return (
                     <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
                         <Space direction="vertical" style={{ width: '100%' }}>
-                            {commits.map((commit) => (
+                            {commits.map((commit: Commit) => (
                                 <div key={commit.sha} style={{ padding: '12px', border: '1px solid #f0f0f0', borderRadius: '6px' }}>
                                     <Checkbox
                                         checked={selectedCommits.has(commit.sha)}
@@ -139,9 +141,13 @@ export function EntryGenerationDialog({ projectId, isOpen, onClose }: EntryGener
                                         }}
                                     >
                                         <Space direction="vertical" size={1}>
-                                            <Typography.Text strong>{commit.message}</Typography.Text>
+                                            <Typography.Text strong>
+                                                <Link target="_blank" href={`https://github.com/${project.githubRepoOwner}/${project.githubRepoName}/commit/` + commit.sha}>
+                                                    {commit.message}
+                                                </Link>
+                                            </Typography.Text>
                                             <Typography.Text type="secondary">
-                                                {commit.author} • {new Date(commit.date).toLocaleDateString()}
+                                                    {commit.author} • {new Date(commit.date).toLocaleDateString()}
                                             </Typography.Text>
                                         </Space>
                                     </Checkbox>

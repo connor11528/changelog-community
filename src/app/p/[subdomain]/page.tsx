@@ -3,11 +3,11 @@ import {prisma} from '@/lib/prisma';
 import EntryCard from "@/components/EntryCard";
 import Link from "next/link";
 
-export default async function ChangelogPage({
-                                                params: {subdomain}
-                                            }: {
-    params: { subdomain: string }
+export default async function ChangelogPage(
+    { params, }: { params: { subdomain: string };
 }) {
+    const { subdomain } = await params;
+
     // Fetch project and entries
     const project = await prisma.project.findUnique({
         where: {subdomain},
