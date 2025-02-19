@@ -96,7 +96,7 @@ function FixedSidebar({
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <>
+    <div className="dark:bg-gray-950">
       <FixedSidebar main={<Intro />} footer={<IntroFooter />} />
       <ThemeToggle />
       <div className="relative flex-auto">
@@ -105,6 +105,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
           {children}
         </main>
       </div>
-    </>
+    </div>
   )
 }
