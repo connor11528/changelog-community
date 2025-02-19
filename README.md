@@ -29,6 +29,7 @@ Changelog entries get posted to a user's public changelog site where they can sh
 - **Prisma ORM:** Not as nice as [Eloquent](https://laravel.com/docs/11.x/eloquent) but that's okay 🤪
 - **Vercel:** hosting
 - **Ant Design:** I've had my eye on this design framework for a while primarily because their multi select input looks cool. It serves it\'s purpose but I did not get super into the weeds here. Overall I like it though shadcn/ui seems to be an industry favorite and what I\'m using on my other side project.
+- **No queued jobs:** sometime fetching the commits from the GitHub API and feeding it to an LLM can take a bit long. Right now we're doing it all in the request lifecycle but could use queued jobs and websockets to provide a snappier user experience.
 
 ## Accessing the application
 
@@ -38,7 +39,7 @@ Changelog community is deployed live at [https://changelog.community](https://ww
 
 To run locally you will need to fill in the values in `.env.example` in your own `.env` file. Notably you'll need need Open API key, Clerk API key and a Postgres database. The Postgres database I'm using is on Neon via Vercel.
 
-## Starter template info
+## Starter template info..
 
 ### Adding changelog entries to homepage
 
