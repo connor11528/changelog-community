@@ -27,7 +27,7 @@ Changelog entries get posted to a user's public changelog site where they can sh
 - **OpenAI**: OpenAI is the LLM I'm using.
 - **Postgres Neon**: I created the Postgres database through the Vercel UI. I wanted a database to store users, projects and entries to various commit logs. The database is set up in such a way that multiple users can belong to projects, rather than only one user being able to post entries to a changelog.
 - **Prisma ORM:** Not as nice as [Eloquent](https://laravel.com/docs/11.x/eloquent) but that's okay 🤪
-- **Vercel:** hosting
+- **Vercel:** hosting and Vercel DNS servers. I bought the domain on Porkbun but then pointed nameservers to Vercel for the subdomain matching.
 - **Ant Design:** I've had my eye on this design framework for a while primarily because their multi select input looks cool. It serves it\'s purpose but I did not get super into the weeds here. Overall I like it though shadcn/ui seems to be an industry favorite and what I\'m using on my other side project.
 - **No queued jobs:** sometime fetching the commits from the GitHub API and feeding it to an LLM can take a bit long. Right now we're doing it all in the request lifecycle but could use queued jobs and websockets to provide a snappier user experience.
 
