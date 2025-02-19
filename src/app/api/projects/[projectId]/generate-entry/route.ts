@@ -29,8 +29,6 @@ export async function POST(
             }
         });
 
-        console.log({project})
-
         if (!project || !project.githubRepoOwner || !project.githubRepoName) {
             return new NextResponse("Project not found or GitHub not configured", { status: 404 });
         }
@@ -67,8 +65,6 @@ export async function POST(
                 };
             })
         );
-
-        console.log({commitDetails})
 
         // Prepare the prompt for the LLM
         const prompt = `You are a technical writer creating a changelog entry. Please analyze these commits and their changes to create a clear, well-structured changelog entry.

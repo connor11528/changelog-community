@@ -16,9 +16,25 @@ interface DashboardClientProps {
     projects: Project[];
 }
 
-export function DashboardClient({ projects }: DashboardClientProps) {
+export function DashboardClient({ projects: initialProjects }: DashboardClientProps) {
+    const [projects, setProjects] = useState<Project[]>(initialProjects);
     const [entryProject, setEntryProject] = useState<Project | null>(null);
     const [selectedProject, setSelectedProject] = useState<string | null>(null);
+
+    const handleRepositoryUpdate = (projectId: string, updatedRepo: { owner: string, name: string }) => {
+        setProjects(currentProjects =>
+            currentProjects.map(project =>
+                project.id === projectId
+                    ? {
+                        ...project,
+                        githubRepoOwner: updatedRepo.owner,
+                        githubRepoName: updatedRepo.name
+                    }
+                    : project
+            )
+        );
+        setSelectedProject(null);
+    };
 
     return (
         <Space direction="vertical" size={24} style={{ width: '100%' }}>
@@ -75,7 +91,8 @@ export function DashboardClient({ projects }: DashboardClientProps) {
             <GitHubLinkDialog
                 projectId={selectedProject!}
                 isOpen={!!selectedProject}
-                onClose={() => setSelectedProject(null)}
+                onCloseAction={() => setSelectedProject(null)}
+                onSuccessAction={handleRepositoryUpdate}
             />
         </Space>
     );

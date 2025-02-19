@@ -46,7 +46,6 @@ export function EntryGenerationDialog({ project, isOpen, onClose }: EntryGenerat
         })}`);
         const data = await response.json();
         setCommits(data);
-        setSelectedCommits(new Set(data.map((c: Commit) => c.sha)));
         setStep('commits');
     };
 
@@ -213,9 +212,6 @@ export function EntryGenerationDialog({ project, isOpen, onClose }: EntryGenerat
                 return [
                     <Button key="back" onClick={() => setStep('commits')}>
                         Back
-                    </Button>,
-                    <Button key="draft" onClick={() => handlePublish(true)} loading={isLoading}>
-                        Save as Draft
                     </Button>,
                     <Button key="publish" type="primary" onClick={() => handlePublish(false)} loading={isLoading}>
                         Publish

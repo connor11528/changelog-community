@@ -30,8 +30,6 @@ export async function GET(
             }
         });
 
-        console.log(project)
-
         if (!project || !project.githubRepoOwner || !project.githubRepoName) {
             return new NextResponse("Project not found or GitHub not configured", { status: 404 });
         }
@@ -75,7 +73,6 @@ export async function GET(
             type: commit.commit.message.match(/^(\w+)(\(.+\))?:/)?.[1]
         }));
 
-        console.log({transformedCommits})
         return NextResponse.json(transformedCommits);
 
     } catch (error) {

@@ -5,10 +5,11 @@ import { useState } from 'react'
 interface GitHubLinkDialogProps {
     projectId: string
     isOpen: boolean
-    onClose: () => void
+    onCloseAction: () => void
+    onSuccessAction: (projectId: string, repo: { owner: string, name: string }) => void
 }
 
-export function GitHubLinkDialog({ projectId, isOpen, onClose }: GitHubLinkDialogProps) {
+export function GitHubLinkDialog({ projectId, isOpen, onCloseAction, onSuccessAction }: GitHubLinkDialogProps) {
     const [repoUrl, setRepoUrl] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState('')
@@ -48,8 +49,8 @@ export function GitHubLinkDialog({ projectId, isOpen, onClose }: GitHubLinkDialo
                 throw new Error(data.error || 'Failed to link repository')
             }
 
-            onClose()
-            window.location.reload()
+            onSuccessAction(projectId, { owner, name: repoName })
+            onCloseAction()
         } catch (err) {
             console.error(err)
             setError('Failed to link repository')
@@ -88,7 +89,7 @@ export function GitHubLinkDialog({ projectId, isOpen, onClose }: GitHubLinkDialo
                     <div className="flex justify-end gap-3">
                         <button
                             type="button"
-                            onClick={onClose}
+                            onClick={onCloseAction}
                             className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
                         >
                             Cancel

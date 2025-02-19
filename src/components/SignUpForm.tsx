@@ -70,8 +70,6 @@ export function SignUpForm() {
                 code,
             });
 
-            console.log({completeSignUp})
-
             if (completeSignUp.status !== 'complete') {
                 console.error(JSON.stringify(completeSignUp, null, 2))
                 throw Error('Error completing signup');
