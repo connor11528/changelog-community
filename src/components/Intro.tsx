@@ -63,9 +63,9 @@ export function Intro() {
         {/*<IconLink href="#" icon={BookIcon} className="flex-none">*/}
         {/*  Documentation*/}
         {/*</IconLink>*/}
-        {/*<IconLink href="#" icon={GitHubIcon} className="flex-none">*/}
-        {/*  GitHub*/}
-        {/*</IconLink>*/}
+        <IconLink href="http://github.com/connor11528/changelog-community/" icon={GitHubIcon} className="flex-none">
+          GitHub
+        </IconLink>
         {/*<IconLink href="/feed.xml" icon={FeedIcon} className="flex-none">*/}
         {/*  RSS*/}
         {/*</IconLink>*/}

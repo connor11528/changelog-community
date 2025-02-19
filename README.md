@@ -1,50 +1,48 @@
 # changelog.community
 
-Commit is a [Tailwind UI](https://tailwindui.com) site template built using [Tailwind CSS](https://tailwindcss.com) and [Next.js](https://nextjs.org).
+[Changelog.community](https://www.changelog.community/) is your AI generated changelog.
 
-## Getting started
+Link your public github repository and generate changelog entries with AI.
 
-To get started, first install dependencies via npm:
+## Product Decisions
 
-```bash
-npm install
-```
+I wanted to make a site that could grow into a community of people that ship. Currently, the site gives users the power to pull in commits for a given date range, select which ones to generate an entry for and then generate changelog entries with AI from the GitHub changes made in the commit.
 
-Next, create a `.env.local` file in the root of your project and set the `NEXT_PUBLIC_SITE_URL` environment variable to your site's public URL:
+Changelog entries get posted to a user's public changelog site where they can share their product updates with the world.
 
-```
-NEXT_PUBLIC_SITE_URL=https://example.com
-```
+## Longer term
 
-Then start the development server:
+- **Newsfeed:** Longer term there could be a newsfeed of all the changelog entries that people are shipping or there could be a way to subscribe to changelogs and see those entries in your feed.
+- **GitHub OAuth:** We're not handling private tokens right now. Supporting private repositories and higher rate limits through GitHub OAuth would be a logical step forward, especially given we have Clerk to help with that.
+- **Entry management:** Right now you can regenerate entries but once they are posted you are stuck with them forever. Users will need to edit and delete their entries.
+- **Entry improvements:** Each entry could have their own custom URL slug and image. Their could also be some author or authors shown for the entry.
+- ... and many more
 
-```bash
-npm run dev
-```
+## Technical Decisions
 
-Finally, open [http://localhost:3000](http://localhost:3000) in your browser to view the website.
+- **Clerk for authentication:** This seems to be the de facto standard for auth. It was my first time using it and I like it :)
+- **Subdomains:** each user when they sign up will get a subdomain where their changelog will be hosted. I wanted a public site where people can host their changelogs that made sense and people can share that is entirely their own. Perhaps in the future we could offer CNAME records as part of a premium plan ✨ for people that want their changelog on their own domain.
+- **Commit Tailwind UI template:** I used the Tailwind UI "Changelog" starter template because it felt fitting for a changelog site.
+- **AI development**: I primarily used Claude and Perplexity for building out the application.
+- **OpenAI**: OpenAI is the LLM I'm using.
+- **Postgres Neon**: I created the Postgres database through the Vercel UI. I wanted a database to store users, projects and entries to various commit logs. The database is set up in such a way that multiple users can belong to projects, rather than only one user being able to post entries to a changelog.
+- **Prisma ORM:** Not as nice as [Eloquent](https://laravel.com/docs/11.x/eloquent) but that's okay 🤪
+- **Vercel:** hosting
+- **Ant Design:** I've had my eye on this design framework for a while primarily because their multi select input looks cool. It serves it\'s purpose but I did not get super into the weeds here. Overall I like it though shadcn/ui seems to be an industry favorite and what I\'m using on my other side project.
 
-## Customizing
+## Accessing the application
 
-We've tried to build this template exactly the same way we'd build it if it we were building a real website, so there's no weird configuration files or global variables like you might see in a product that has been built as a "theme" rather than as an actual site.
+Changelog community is deployed live at [https://changelog.community](https://www.changelog.community/).
 
-Instead, you make changes by just opening the files you want to change, and changing whatever it is you want to change.
+## Running locally
 
-We'll cover a lot of the fundamentals here to help you get going quickly, but at the end of the day the whole codebase is yours and you should feel free to edit everything directly as much as you need to.
+To run locally you will need to fill in the values in `.env.example` in your own `.env` file. Notably you'll need need Open API key, Clerk API key and a Postgres database. The Postgres database I'm using is on Neon via Vercel.
 
-### Project structure
+## Starter template info
 
-The template is built as a pretty standard Next.js website, but using the `src` folder so things like the `app` directory are located at `./src/app` instead of being top-level.
+### Adding changelog entries to homepage
 
-### Title and metadata
-
-You can update your site's metadata in `./src/app/layout.tsx`.
-
-### Hero content
-
-The main hero section for the site that includes your logo, headline, description, and links are all located in `./src/components/Intro.tsx`.
-
-### Adding changelog entries
+> This will probably turn into landing page and marketing content
 
 All of the changelog entries are stored in one big `./src/app/page.mdx` file. We were inspired to set it up this way by how projects commonly maintain plaintext `CHANGELOG` files, and thought it would be cool to parse this sort of format and turn it into a nicely designed site.
 
@@ -60,10 +58,6 @@ Each changelog entry should be separated by a horizontal rule (`---`) and should
 Your content...
 ```
 
-### Newsletter
-
-You can find the newsletter sign up form in `./src/components/SignUpForm.tsx` — if you have a newsletter you'll want to wire this up with whatever mailing list software you use to get it to actually work.
-
 ### RSS feed
 
 The site uses a [route handler](https://nextjs.org/docs/app/building-your-application/routing/router-handlers) to automatically generate an RSS feed at run time based on the rendered home page.
@@ -71,18 +65,3 @@ The site uses a [route handler](https://nextjs.org/docs/app/building-your-applic
 You can edit the metadata for the feed (like the title and description) in `./src/app/feed.xml/route.ts`.
 
 Make sure to set your `NEXT_PUBLIC_SITE_URL` environment variable as the RSS feed needs this to generate the correct links for each entry.
-
-## License
-
-This site template is a commercial product and is licensed under the [Tailwind UI license](https://tailwindui.com/license).
-
-## Learn more
-
-To learn more about the technologies used in this site template, see the following resources:
-
-- [Tailwind CSS](https://tailwindcss.com/docs) - the official Tailwind CSS documentation
-- [Next.js](https://nextjs.org/docs) - the official Next.js documentation
-- [Motion One](https://motion.dev/) - the official Motion One documentation
-- [MDX](https://mdxjs.com/) - the official MDX documentation
-
-deploy + 1

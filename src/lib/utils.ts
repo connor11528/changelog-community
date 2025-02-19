@@ -8,5 +8,5 @@ export function getProjectUrl(subdomain: string): string {
         return `http://${subdomain}.localhost:3000`;
     }
 
-    return `https://${subdomain}.mydomain.com`;
+    return `https://${subdomain}.changelog.community`;
 }
