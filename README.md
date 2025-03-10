@@ -4,6 +4,8 @@
 
 Link your public github repository and generate changelog entries with AI ⚡️
 
+[Show HN](https://news.ycombinator.com/item?id=43326615)
+
 ## Product Decisions
 
 I wanted to make a site that could grow into a community of people that ship. Currently, the site gives users the power to pull in commits for a given date range, select which ones to generate an entry for and then generate changelog entries with AI from the GitHub changes made in the commit.
