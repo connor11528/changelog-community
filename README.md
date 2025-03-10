@@ -2,7 +2,7 @@
 
 [Changelog.community](https://www.changelog.community/) is your AI generated changelog.
 
-Link your public github repository and generate changelog entries with AI.
+Link your public github repository and generate changelog entries with AI ⚡️
 
 ## Product Decisions
 
