@@ -5,6 +5,7 @@ import { SignUpForm } from '@/components/SignUpForm'
 import {metadata} from "@/app/layout";
 import {useAuth} from "@clerk/nextjs";
 import {Button} from "@/components/Button";
+import {LinkedinIcon} from "lucide-react";
 
 function BookIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -64,11 +65,11 @@ export function Intro() {
         {/*  Documentation*/}
         {/*</IconLink>*/}
         <IconLink href="http://github.com/connor11528/changelog-community/" icon={GitHubIcon} className="flex-none">
-          GitHub
+          View source
         </IconLink>
-        {/*<IconLink href="/feed.xml" icon={FeedIcon} className="flex-none">*/}
-        {/*  RSS*/}
-        {/*</IconLink>*/}
+        <IconLink href="https://www.linkedin.com/in/connorleech/" icon={LinkedinIcon} className="flex-none">
+          Connect on LinkedIn
+        </IconLink>
       </div>
     </>
   )

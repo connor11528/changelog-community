@@ -78,7 +78,7 @@ export function GitHubLinkDialog({ projectId, isOpen, onCloseAction, onSuccessAc
                             required
                         />
                         <p className="mt-1 text-sm text-gray-500">
-                            Enter the full URL of your GitHub repository
+                            Enter the full URL of your PUBLIC GitHub repository
                         </p>
                     </div>
 
@@ -94,13 +94,16 @@ export function GitHubLinkDialog({ projectId, isOpen, onCloseAction, onSuccessAc
                         >
                             Cancel
                         </button>
-                        <button
-                            type="submit"
-                            disabled={isLoading}
-                            className="cursor-pointer px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 disabled:opacity-50"
-                        >
-                            {isLoading ? 'Linking...' : 'Link Repository'}
-                        </button>
+                        <div className="text-white">
+                            <button
+                                type="submit"
+                                disabled={isLoading}
+                                className="cursor-pointer px-4 py-2 text-sm font-medium bg-blue-600 rounded-md hover:bg-blue-700 disabled:opacity-50"
+                            >
+                                {isLoading ? 'Linking...' : 'Link Repository'}
+                            </button>
+                        </div>
+
                     </div>
                 </form>
             </div>

@@ -3,7 +3,7 @@
 import React from 'react';
 import { UserButton, useUser } from '@clerk/nextjs';
 import Link from 'next/link';
-import { Home, BarChart, Settings, Bell } from 'lucide-react';
+import { Bell } from 'lucide-react';
 
 const DashboardNav = () => {
     const { user, isLoaded } = useUser();

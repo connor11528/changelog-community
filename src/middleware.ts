@@ -6,6 +6,7 @@ import {prisma} from "@/lib/prisma";
 const isPublicRoute = createRouteMatcher([
     '/',
     '/sign-in',
+    '/forgot-password',
     '/dashboard(.*)',
     '/api/check-subdomain(.*)',
     '/api/create-subdomain(.*)',

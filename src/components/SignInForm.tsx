@@ -68,10 +68,15 @@ export function SignInForm() {
                 Sign In
             </button>
 
-            <div className="text-center text-gray-400">
+            <div className="mt-5 text-center text-gray-400">
                 Don&apos;t have an account?{' '}
                 <Link href="/" className="text-sky-400 hover:text-sky-300 transition-colors font-medium">
                     Sign up
+                </Link>
+            </div>
+            <div className="text-center text-gray-400">
+                <Link href="/forgot-password" className="text-sky-400 hover:text-sky-300 transition-colors font-medium">
+                    Forgot password
                 </Link>
             </div>
         </form>
