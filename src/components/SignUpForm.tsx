@@ -110,18 +110,21 @@ export function SignUpForm() {
                     <label htmlFor="code" className="text-lg">
                         Enter your email verification code
                     </label>
-                    <input
-                        value={code}
-                        id="code"
-                        name="code"
-                        onChange={(e) => setCode(e.target.value)}
-                        className="bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        type="text"
-                        placeholder="Enter code"
-                    />
+                    <div className="mb-3">
+                        <input
+                            value={code}
+                            id="code"
+                            name="code"
+                            onChange={(e) => setCode(e.target.value)}
+                            className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            type="text"
+                            placeholder="Enter code"
+                        />
+                    </div>
+
                     <button
                         type="submit"
-                        className="cursor-pointer w-full px-4 py-2 bg-sky-500 hover:bg-sky-400 text-white font-medium rounded-lg transition-colors"
+                        className="mt-3 cursor-pointer w-full px-4 py-2 bg-sky-500 hover:bg-sky-400 text-white font-medium rounded-lg transition-colors"
                     >
                         Verify
                     </button>
@@ -132,8 +135,8 @@ export function SignUpForm() {
 
 
     return (
-        <form onSubmit={handleSubmit} className="mt-8 space-y-6 max-w-md">
-            <div>
+        <form onSubmit={handleSubmit} className="mt-8 space-y-6 max-w-md text-white">
+        <div>
                 <label htmlFor="email" className={labelClassName}>Email</label>
                 <input
                     id="email"
@@ -182,7 +185,7 @@ export function SignUpForm() {
             )}
 
             {/* CAPTCHA Widget */}
-            <div id="clerk-captcha"></div>
+            <div id="clerk-captcha" className="text-white"></div>
 
             <button
                 type="submit"
