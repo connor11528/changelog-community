@@ -33,7 +33,7 @@
     "mdast-util-to-string": "^4.0.0",
     "mdx-annotations": "^0.1.4",
     "motion": "^10.17.0",
-    "next": "^15.1.7",
+    "next": "15.1.11",
     "next-themes": "^0.2.1",
     "openai": "^4.85.1",
     "prisma": "^6.3.1",
